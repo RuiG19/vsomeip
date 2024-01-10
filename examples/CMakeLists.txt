@@ -25,10 +25,16 @@ target_link_libraries(subscribe-sample ${VSOMEIP_NAME} ${Boost_LIBRARIES} ${DL_L
 add_executable(notify-sample notify-sample.cpp ${EXAMPLE_CONFIG_FILES})
 target_link_libraries(notify-sample ${VSOMEIP_NAME} ${Boost_LIBRARIES} ${DL_LIBRARY})
 
-add_dependencies(examples request-sample response-sample subscribe-sample notify-sample)
+add_executable(service service.cpp ${EXAMPLE_CONFIG_FILES})
+target_link_libraries(service ${VSOMEIP_NAME} ${Boost_LIBRARIES} ${DL_LIBRARY})
+
+add_executable(client client.cpp ${EXAMPLE_CONFIG_FILES})
+target_link_libraries(client ${VSOMEIP_NAME} ${Boost_LIBRARIES} ${DL_LIBRARY})
+
+add_dependencies(examples request-sample response-sample subscribe-sample notify-sample service client)
 
 install (
-    TARGETS request-sample response-sample subscribe-sample notify-sample
+    TARGETS request-sample response-sample subscribe-sample notify-sample service client
     RUNTIME DESTINATION "${INSTALL_BIN_DIR}" COMPONENT bin
 )
 
